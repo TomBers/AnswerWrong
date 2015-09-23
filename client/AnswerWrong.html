@@ -1,0 +1,25 @@
+<head>
+  <title>cardAnim</title>
+</head>
+
+<body>
+  <div class="flexContainer">
+  {{> makeQn}}
+  {{> cardDeck}}
+  {{> ansDeck}}
+</div>
+
+  <!-- {{> cardDeck}} -->
+</body>
+
+<template name="cardDeck">
+      {{#each cardList}}
+      {{> qnCard}}
+      {{/each}}
+</template>
+
+<template name="ansDeck">
+      {{#each ansList}}
+      {{> ansCard}}
+      {{/each}}
+</template>
