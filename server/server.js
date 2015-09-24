@@ -4,7 +4,15 @@ Meteor.methods({
   },
   addQn: function(a){
     return Qns.upsert({qn:a.qn,ans:a.ans},{qn:a.qn,ans:a.ans});
-    // Qns.insert({qn:qn,ra:ra});
   },
+  updateViews:function(WrongAnswersShown){
+    // console.log(WrongAnswersShown);
+    return WrongAnswers.update( {_id: {$in:WrongAnswersShown}},
+                         {$inc: {views:1}},
+                         {multi:true} );
+  },
+  updateChoosenAnswer:function(selAns){
+    return WrongAnswers.update( {_id: selAns},{$inc: {choosen:1}});
+  }
 
 });

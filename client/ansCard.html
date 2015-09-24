@@ -1,10 +1,14 @@
 <template name="ansCard">
   <div class="qnCardContainer">
       <div class="qnCardQn">{{getQn}}</div>
-      <ol>
+      <div class='ansContainer'>
       {{#each getAns}}
-      <li>{{ans}}</li>
+      {{> ansItem}}
       {{/each}}
-</ol>
+    </div>
   </div>
+</template>
+
+<template name="ansItem">
+  <div class='ansItem {{checked}}'>{{ans}}</div>
 </template>
