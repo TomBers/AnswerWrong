@@ -1,11 +1,16 @@
 <template name="ansCard">
   <div class="qnCardContainer">
-      <div class="qnCardQn">{{getQn}}</div>
-      <div class='ansContainer'>
+    {{bob}}
+    {{#if isASmall}}
+    <div class="qnCardQn">A</div>
+    {{else}}    
+    <div class="qnCardQn">{{qn}}</div>
+    <div class='ansContainer'>
       {{#each getAns}}
       {{> ansItem}}
       {{/each}}
     </div>
+    {{/if}}
   </div>
 </template>
 

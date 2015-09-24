@@ -1,10 +1,15 @@
 <template name="qnCard">
   <div class="qnCardContainer">
+
+    {{#if isSmall}}
+    <div class="qnCardQn">Q</div>
+    {{else}}
       <div class="qnCardQn">{{qn}}</div>
       <div class="qnCardAns">({{ans}})</div>
       <form class="new-wrongAns">
       <input type="text" name="wrongAns" class="wrongAnsTxt" placeholder="A Wrong Answer" value="">
       <div class="wordDist">Dist : {{wordDist}}</div>
     </form>
+    {{/if}}
   </div>
 </template>

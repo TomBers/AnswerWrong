@@ -1,20 +1,14 @@
-<head>
-  <title>cardAnim</title>
-</head>
-
-<body>
+<template name="AnswerWrong">
   <div style="display:block;width:100%;min-height:30px">
   {{> loginButtons}}
 </div>
 
   <div class="flexContainer">
-  {{> makeQn}}
   {{> cardDeck}}
   {{> ansDeck}}
 </div>
+</template>
 
-  <!-- {{> cardDeck}} -->
-</body>
 
 <template name="cardDeck">
       {{#each cardList}}

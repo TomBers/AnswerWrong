@@ -16,12 +16,12 @@ if (Meteor.isClient) {
 
   Template.cardDeck.helpers({
     cardList: function () {
-      return Qns.find({},{limit:1});
+      return Qns.find({});
     }
   });
   Template.ansDeck.helpers({
     ansList: function () {
-      return Qns.find({},{limit:1});
+      return Qns.find({});
     }
   });
 

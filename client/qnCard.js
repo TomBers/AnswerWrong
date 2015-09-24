@@ -1,11 +1,15 @@
 Template.qnCard.helpers({
   wordDist: function(){
     return Session.get(this._id) || 0;
+  },
+  isSmall:function(){
+    return Session.get(this._id+'_QisSmall');
   }
 });
 
 Template.qnCard.onRendered(function () {
   // console.log(this);
+  Session.setDefault(this.data._id+'_QisSmall', true);
 })
 
 Template.qnCard.onCreated(function(){
@@ -14,6 +18,17 @@ Template.qnCard.onCreated(function(){
 
 
 Template.qnCard.events({
+  "click .qnCardContainer":function(e,t){
+    var tmp = this;
+    var isSmall = Session.get(this._id+'_QisSmall');
+    if(isSmall){
+    Velocity(e.currentTarget,{ height: "400px",width:"400px"},{duration:2000})
+    .then(function(ele) { Session.set(tmp._id+'_QisSmall', false); });
+  }else{
+    // Velocity(e.currentTarget,{ height: "50px",width:"50px"},
+    // {duration:2000,begin: function(elements) { Session.set(tmp._id+'_QisSmall', true); }});
+  }
+  },
   "keyup .wrongAnsTxt":function(e,t){
     this.wa.updateDist(e.target.value);
     Session.set(this._id,this.wa.answerDist);
