@@ -17,7 +17,7 @@ Template.ansCard.onRendered(function(){
 Template.ansCard.helpers({
   getAns: function(){
     var wa = WrongAnswers.find({qnId:this._id});
-    this['waID'] = wa.fetch().map(function(obj){return obj._id});
+    this.waID = wa.fetch().map(function(obj){return obj._id});
     return wa;
   },
   isASmall:function(){
@@ -27,6 +27,7 @@ Template.ansCard.helpers({
 
 Template.ansCard.events({
   "click .qnCardContainer":function(e,t){
+    // console.log(this._id);
     var tmp = this;
     var isSmall = Session.get(this._id+'_AisSmall');
     if(isSmall){
@@ -52,15 +53,19 @@ Template.ansItem.events({
     Session.set(t.data.qnId+'_selected',t.data._id);
   },
   "click .ansItem.checked":function(e,t){
-    console.log(t.data._id);
+
+    var pid = Template.parentData()._id;
+    // console.log(t.data._id);
     Meteor.call("updateChoosenAnswer", t.data._id, function(error, result){
       if(error){
         console.log("error", error);
       }
       if(result){
-
         // console.log(result);
         alert('Thanks');
+        var tmp = Session.get('seenAns');
+        tmp.push(pid);
+        Session.set('seenAns',tmp);
       }
     });
 

@@ -1,6 +1,7 @@
 if (Meteor.isClient) {
   Session.setDefault('wordDist',0);
   Session.setDefault('seenQns',[]);
+  Session.setDefault('seenAns',[]);
 
 
   Template.cardDeck.helpers({
@@ -10,7 +11,7 @@ if (Meteor.isClient) {
   });
   Template.ansDeck.helpers({
     ansList: function () {
-      return Qns.find({});
+      return Qns.find({_id:{ $nin: Session.get('seenAns') }},{});
     }
   });
 
