@@ -7,9 +7,11 @@ Meteor.methods({
   },
   updateViews:function(WrongAnswersShown){
     // console.log(WrongAnswersShown);
+    if(WrongAnswersShown && WrongAnswersShown.length > 0){
     return WrongAnswers.update( {_id: {$in:WrongAnswersShown}},
                          {$inc: {views:1}},
                          {multi:true} );
+    }
   },
   updateChoosenAnswer:function(selAns){
     return WrongAnswers.update( {_id: selAns},{$inc: {choosen:1}});

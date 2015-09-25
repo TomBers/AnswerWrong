@@ -8,9 +8,10 @@ body {
   display: inline-flex;
   flex-direction: row;
    flex-wrap: wrap;
+   width:100%;
 
 }
-.card {
+/*.card {
     display: flex;
     margin: 5px;
     width: 200px;
@@ -25,7 +26,7 @@ body {
 .cardTxt,.qnTxt {
   font-family: 'Montserrat', sans-serif;
     color: white;
-}
+}*/
 
 input[type=text] {
    /* Awesome styling */
@@ -88,21 +89,24 @@ input[type=text] {
   align-items: center;
   justify-content: center;
   margin:1%;
-  width:48%;
-  min-height: 45px;
+  min-width:48%;
+  /*min-height: 45px;*/
   background-color: white;
   font-family: 'Montserrat', sans-serif;
     color: black;
+    font-size: 1.8em;
 }
 .ansItem:hover,.ansItem.checked{
   background-color: black;
   color: white;
 }
 
-
-.qnCardQn{
+.qnCardQnSmall{
   font-size: 1.2em;
   }
+  .qnCardQn{
+    font-size: 2.2em;
+    }
   .qnCardAns {
-  font-size: 0.8em;
+  font-size: 1.8em;
 }
