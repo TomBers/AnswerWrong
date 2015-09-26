@@ -1,11 +1,11 @@
-<template name="qnCard">
-  <div class="qnCardContainer">
+<template name="makeWrongAns">
+  <div class="makeWrongAnsContainer">
 
     {{#if isSmall}}
-    <div class="qnCardQnSmall">Q</div>
+    <div class="makeWrongAnsQnSmall">Q</div>
     {{else}}
-      <div class="qnCardQn">{{qn}}</div>
-      <div class="qnCardAns">({{ans}})</div>
+      <div class="makeWrongAnsQn">{{qn}}</div>
+      <div class="makeWrongAnsAns">({{ans}})</div>
       <form class="new-wrongAns">
       <input type="text" name="wrongAns" class="wrongAnsTxt" placeholder="A Wrong Answer" value="">
       <div class="wordDist">Dist : {{wordDist}}</div>

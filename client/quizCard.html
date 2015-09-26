@@ -1,10 +1,10 @@
-<template name="ansCard">
-  <div class="qnCardContainer">
+<template name="quizCard">
+  <div class="makeWrongAnsContainer">
     {{bob}}
     {{#if isASmall}}
-    <div class="qnCardQnSmall">A</div>
+    <div class="makeWrongAnsQnSmall">A</div>
     {{else}}
-    <div class="qnCardQn">{{qn}}</div>
+    <div class="makeWrongAnsQn">{{qn}}</div>
     <div class='ansContainer'>
       {{#each getAns}}
       {{> ansItem}}

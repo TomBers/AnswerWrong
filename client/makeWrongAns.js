@@ -1,4 +1,4 @@
-Template.qnCard.helpers({
+Template.makeWrongAns.helpers({
   wordDist: function(){
     return Session.get(this._id) || 0;
   },
@@ -7,21 +7,21 @@ Template.qnCard.helpers({
   }
 });
 
-Template.qnCard.onRendered(function () {
+Template.makeWrongAns.onRendered(function () {
   // console.log(this);
   Session.setDefault(this.data._id+'_QisSmall', true);
-  this.data.wa = new WrongAns(this.data._id,Meteor.userId(),this.data.ans);
+  this.data.wa = new WrongAns(this.data._id,this.data.ans);
   // console.log(this.data);
 })
 
-// Template.qnCard.onCreated(function(){
+// Template.makeWrongAns.onCreated(function(){
 //     this.data.wa = new WrongAns(this.data._id,Meteor.userId(),this.data.ans);
 //     // console.log(this.data);
 // });
 
 
-Template.qnCard.events({
-  "click .qnCardContainer":function(e,t){
+Template.makeWrongAns.events({
+  "click .makeWrongAnsContainer":function(e,t){
     var tmp = this;
     var isSmall = Session.get(this._id+'_QisSmall');
     if(isSmall){

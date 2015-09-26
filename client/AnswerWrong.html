@@ -12,12 +12,12 @@
 
 <template name="cardDeck">
       {{#each cardList}}
-      {{> qnCard}}
+      {{> makeWrongAns}}
       {{/each}}
 </template>
 
 <template name="ansDeck">
       {{#each ansList}}
-      {{> ansCard}}
+      {{> quizCard}}
       {{/each}}
 </template>

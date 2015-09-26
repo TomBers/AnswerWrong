@@ -61,7 +61,7 @@ input[type=text] {
 }
 
 
-.qnCardContainer{
+.makeWrongAnsContainer{
   display: inline-flex;
   flex-direction: column;
    flex-wrap: wrap;
@@ -101,12 +101,12 @@ input[type=text] {
   color: white;
 }
 
-.qnCardQnSmall{
+.makeWrongAnsQnSmall{
   font-size: 1.2em;
   }
-  .qnCardQn{
+  .makeWrongAnsQn{
     font-size: 2.2em;
     }
-  .qnCardAns {
+  .makeWrongAnsAns {
   font-size: 1.8em;
 }

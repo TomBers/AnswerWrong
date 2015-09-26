@@ -1,6 +1,7 @@
-WrongAns = function (qnId, ownerId,correctAns){
+WrongAns = function (qnId,correctAns){
+  this._id = Math.random();
   this.qnId = qnId;
-  this.ownerId = ownerId;
+  this.ownerId = Meteor.userId();
   this.correctAns = correctAns;
   this.ans = "";
   this.views = 0;
@@ -11,6 +12,7 @@ WrongAns = function (qnId, ownerId,correctAns){
 WrongAns.prototype.updateDist = function(wrongAns){
   this.ans = wrongAns;
   // function to see how similar wrong answer is to right answer
+
   this.answerDist = levDist(this.correctAns,wrongAns);
   // console.log(this.correctAns);
   // console.log(wrongAns);
