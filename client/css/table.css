@@ -1,0 +1,27 @@
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#customers td, #customers th {
+    font-size: 1.4em;
+    padding: 10px;
+    /*color: #000000;
+    background-color: #EAF2D3;*/
+}
+
+
+#customers th {
+    font-size: 1.6em;
+    text-align: left;
+    padding: 15px;
+
+    /*background-color: #A7C942;
+    color: #ffffff;*/
+}
+
+tr:nth-child(even) {background: #CCC}
+tr:nth-child(even):hover {background: black;color:white}
+tr:nth-child(odd) {background: #FFF}
+tr:nth-child(odd):hover {background: black;color:white}

@@ -11,6 +11,9 @@ body {
    width:100%;
 
 }
+.userScore{
+  text-align: right;
+}
 /*.card {
     display: flex;
     margin: 5px;

@@ -1,15 +1,17 @@
 <template name="AnswerWrong">
+  {{> userScore}}
   <div class="flexContainer">
-  {{> cardDeck}}
   {{> ansDeck}}
 </div>
 </template>
 
 
-<template name="cardDeck">
+<template name="addWrongAnswer">
+  <div class="flexContainer">
       {{#each cardList}}
       {{> makeWrongAns}}
       {{/each}}
+    </div>
 </template>
 
 <template name="ansDeck">

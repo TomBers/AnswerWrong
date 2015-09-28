@@ -61,10 +61,15 @@ Template.ansItem.events({
   },
   "click .ansItem.checked":function(e,t){
 
+      var pid = Template.parentData()._id;
+
       if (typeof this.correctAns !== "undefined" && this.correctAns === this.ans){
         alert('Correct');
+        var c = Session.get('userScore') + 1;
+        Session.set('userScore', c);
+        removeQn(pid);
       }else{
-        var pid = Template.parentData()._id;
+
         Meteor.call("updateChoosenAnswer", t.data._id, function(error, result){
           if(error){
             console.log("error", error);
@@ -72,15 +77,19 @@ Template.ansItem.events({
           if(result){
             // console.log(result);
             alert('Good Try - But Wrong');
-            var tmp = Session.get('seenAns');
-            tmp.push(pid);
-            Session.set('seenAns',tmp);
+            removeQn(pid);
           }
         });
 
       }
   }
   });
+
+  function removeQn(qid){
+    var tmp = Session.get('seenAns');
+    tmp.push(qid);
+    Session.set('seenAns',tmp);
+  }
 
   function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex ;

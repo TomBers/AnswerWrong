@@ -1,0 +1,19 @@
+<template name="myWrongAnswers">
+  <table id='customers'>
+    <tr>
+      <th>Answer</th>
+      <th>No Views</th>
+      <th>Choosen</th>
+      <th>Percent Success</th>
+    </tr>
+  {{#each WrongAnswer}}
+  <tr>
+    <td>{{ans}}</td>
+    <td>{{views}}</td>
+    <td>{{choosen}}</td>
+    <td>{{percent}} %</td>
+
+  </tr>
+  {{/each}}
+</table>
+</template>
