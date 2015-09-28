@@ -74,11 +74,17 @@ input[type=text] {
    font-family: 'Montserrat', sans-serif;
      color: white;
 }
+.makeWrongAnsContainer:hover{
+   background-color: white;
+   color:#333333;
+}
+
 
 .ansContainer{
-  border:1px solid red;
+  /*border:1px solid red;*/
   width:95%;
-  height:50%;
+  margin-top:4%;
+  /*height:50%;*/
   display: inline-flex;
   flex-direction: row;
    flex-wrap: wrap;
@@ -90,7 +96,7 @@ input[type=text] {
   justify-content: center;
   margin:1%;
   min-width:48%;
-  /*min-height: 45px;*/
+  min-height: 50px;
   background-color: white;
   font-family: 'Montserrat', sans-serif;
     color: black;
@@ -106,6 +112,7 @@ input[type=text] {
   }
   .makeWrongAnsQn{
     font-size: 2.2em;
+    padding: 3%;
     }
   .makeWrongAnsAns {
     margin-top: 10px;

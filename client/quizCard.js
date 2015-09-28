@@ -37,7 +37,7 @@ Template.quizCard.events({
     var tmp = this;
     var isSmall = Session.get(this._id+'_AisSmall');
     if(isSmall){
-    Velocity(e.currentTarget,{ height: "400px",width:"400px",backgroundColor:'#'+Math.floor(Math.random()*16777215).toString(16)},{duration:2000})
+    Velocity(e.currentTarget,{ minHeight:'500px',height: "50%",width:"48%",backgroundColor:'#'+Math.floor(Math.random()*16777215).toString(16)},{duration:2000})
     .then(function(ele) { Session.set(tmp._id+'_AisSmall', false); });
   }else{
     // Velocity(e.currentTarget,{ height: "50px",width:"50px"},
