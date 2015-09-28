@@ -12,8 +12,10 @@ WrongAns = function (qnId,correctAns){
 WrongAns.prototype.updateDist = function(wrongAns){
   this.ans = wrongAns;
   // function to see how similar wrong answer is to right answer
+  var t = levDist(this.correctAns,wrongAns);
+  if(wrongAns.length === 0){return this.answerDist = 0;}
+  else{this.answerDist = t;}
 
-  this.answerDist = levDist(this.correctAns,wrongAns);
   // console.log(this.correctAns);
   // console.log(wrongAns);
   //

@@ -16,7 +16,8 @@ Template.quizCard.onRendered(function(){
 
 Template.quizCard.helpers({
   getAns: function(){
-    var wa = WrongAnswers.find({qnId:this._id}).fetch();
+    rand = Math.random();
+    var wa = WrongAnswers.find({qnId:this._id},{limit:3,sort: {choosen:1}}).fetch();
     this.waID = wa.map(function(obj){return obj._id});
     var tra = new WrongAns(this._id,this.ans);
     tra.updateDist(this.ans);
