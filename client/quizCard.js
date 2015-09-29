@@ -1,9 +1,9 @@
 Template.quizCard.onCreated(function(){
-  Session.setDefault(this.data.qnId+'_selected', '');
+  Session.set(this.data.qnId+'_selected', '');
 });
 
 Template.quizCard.onRendered(function(){
-  Session.setDefault(this.data._id+'_AisSmall', true);
+  Session.set(this.data._id+'_AisSmall', true);
   Meteor.call("updateViews", this.data.waID, function(error, result){
     if(error){
       console.log("error", error);
@@ -26,7 +26,6 @@ Template.quizCard.helpers({
     return shuffle(wa);
   },
   isASmall:function(){
-
     return Session.get(this._id+'_AisSmall');
   }
 });

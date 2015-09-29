@@ -9,7 +9,7 @@ Template.makeWrongAns.helpers({
 
 Template.makeWrongAns.onRendered(function () {
   // console.log(this);
-  Session.setDefault(this.data._id+'_QisSmall', true);
+  Session.set(this.data._id+'_QisSmall', true);
   this.data.wa = new WrongAns(this.data._id,this.data.ans);
   // console.log(this.data);
 })

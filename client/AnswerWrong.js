@@ -1,9 +1,9 @@
 if (Meteor.isClient) {
-  Session.setDefault('wordDist',0);
-  Session.setDefault('seenQns',[]);
-  Session.setDefault('seenAns',[]);
-  Session.setDefault('userScore', 0);
-  Session.setDefault('noQns',0);
+  Session.set('wordDist',0);
+  Session.set('seenQns',[]);
+  Session.set('seenAns',[]);
+  Session.set('userScore', 0);
+  Session.set('noQns',0);
 
 
   Template.addWrongAnswer.helpers({
