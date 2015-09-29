@@ -14,9 +14,7 @@ if (Meteor.isClient) {
   Template.ansDeck.helpers({
     ansList: function () {
       var ans = Qns.find({_id:{ $nin: Session.get('seenAns') }},{});
-      if(Session.get("noQns") === 0){
        Session.set('noQns',ans.fetch().length);
-     }
       return ans;
     }
   });
