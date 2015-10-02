@@ -1,28 +1,17 @@
 Template.quizCard.onCreated(function(){
   Session.set(this.data.qnId+'_selected', '');
+  Session.set(this.data._id+'_AisSmall', true);
 });
 
-Template.quizCard.onRendered(function(){
-  Session.set(this.data._id+'_AisSmall', true);
-  Meteor.call("updateViews", this.data.waID, function(error, result){
-    if(error){
-      console.log("error", error);
-    }
-    if(result){
-      //  console.log(result);
-    }
-  });
-});
 
 Template.quizCard.helpers({
   getAns: function(){
     rand = Math.random();
-    var wa = WrongAnswers.find({qnId:this._id},{limit:3,sort: {choosen:1}}).fetch();
+    var wa = WrongAnswers.find({qnId:this._id},{limit:5,sort: {choosen:1}}).fetch();
     this.waID = wa.map(function(obj){return obj._id});
     var tra = new WrongAns(this._id,this.ans);
-    tra.updateDist(this.ans);
+    tra.setAns(this.ans);
     wa.push(tra);
-
     return shuffle(wa);
   },
   isASmall:function(){
@@ -32,12 +21,11 @@ Template.quizCard.helpers({
 
 Template.quizCard.events({
   "click .makeWrongAnsContainer":function(e,t){
-    // console.log(this._id);
     var tmp = this;
     var isSmall = Session.get(this._id+'_AisSmall');
     if(isSmall){
     Velocity(e.currentTarget,{ minHeight:'500px',height: "50%",width:"48%",backgroundColor:'#'+Math.floor(Math.random()*16777215).toString(16)},{duration:2000})
-    .then(function(ele) { Session.set(tmp._id+'_AisSmall', false); });
+    .then(function(ele) {Session.set(tmp._id+'_AisSmall', false);});
   }else{
     // Velocity(e.currentTarget,{ height: "50px",width:"50px"},
     // {duration:2000,begin: function(elements) { Session.set(tmp._id+'_AisSmall', true); }});
@@ -59,6 +47,15 @@ Template.ansItem.events({
     Session.set(t.data.qnId+'_selected',t.data._id);
   },
   "click .ansItem.checked":function(e,t){
+    // update Viewed Qns
+
+    // console.log(Template.parentData().waID);
+    Meteor.call("updateViews", Template.parentData().waID, function(error, result){
+      if(error){
+        console.log("error", error);
+      }
+      });
+
 
       var pid = Template.parentData()._id;
 

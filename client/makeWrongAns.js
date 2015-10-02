@@ -1,6 +1,6 @@
 Template.makeWrongAns.helpers({
   wordDist: function(){
-    return Session.get(this._id) || 0;
+    return Session.get(this._id) || 'No Score';
   },
   isSmall:function(){
     return Session.get(this._id+'_QisSmall');
@@ -28,23 +28,23 @@ Template.makeWrongAns.events({
     Velocity(e.currentTarget,{ minHeight:'500px',height: "50%",width:"48%", backgroundColor:'#'+Math.floor(Math.random()*16777215).toString(16)},{duration:2000})
     .then(function(ele) {
       Session.set(tmp._id+'_QisSmall', false); });
-  }else{
+  }
+  // else{
     // Velocity(e.currentTarget,{ height: "50px",width:"50px"},
     // {duration:2000,begin: function(elements) { Session.set(tmp._id+'_QisSmall', true); }});
-  }
+  // }
   },
   "keyup .wrongAnsTxt":function(e,t){
 
     if (typeof this.wa === "undefined"){
       this.wa = new WrongAns(this._id,Meteor.userId(),this.ans);
     }
-    this.wa.updateDist(e.target.value);
-    Session.set(this._id,this.wa.answerDist);
+    Session.set(this._id,this.wa.updateScore(e.target.value));
   },
     "submit .new-wrongAns": function (event,t) {
       // Prevent default browser form submit
       event.preventDefault();
-      if(this.wa.ans.length >= 1){
+      if(this.wa.isValidAns()){
       this.wa.commitToDb();
       // console.log(this);
       // Clear form

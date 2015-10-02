@@ -4,5 +4,8 @@ Template.myWrongAnswers.helpers({
   },
   percent:function(){
     return Math.round((this.choosen / this.views) * 100);
+  },
+  totalScore:function(){
+    return this.choosen * this.score || 0;
   }
 });

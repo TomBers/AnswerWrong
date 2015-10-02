@@ -6,21 +6,44 @@ WrongAns = function (qnId,correctAns){
   this.ans = "";
   this.views = 0;
   this.choosen = 0;
-  this.answerDist = 0;
+  this.score = '';
 }
 
-WrongAns.prototype.updateDist = function(wrongAns){
+WrongAns.prototype.setAns = function(wrongAns){
+  this.ans = wrongAns;
+}
+
+WrongAns.prototype.updateScore = function(wrongAns){
   this.ans = wrongAns;
   // function to see how similar wrong answer is to right answer
-  var t = levDist(this.correctAns,wrongAns);
-  if(wrongAns.length === 0){return this.answerDist = 0;}
-  else{this.answerDist = t;}
+if(wrongAns.length === 0){this.score = 'No Score';}
 
-  // console.log(this.correctAns);
-  // console.log(wrongAns);
-  //
-  // console.log(levDist(this.correctAns,wrongAns));
+  var t = levDist(this.correctAns.toLowerCase(),wrongAns.toLowerCase());
+  if(t !== 0){
+  var dist = 1-(t/this.correctAns.length);
+  if(dist < 0.35){
+    this.score = 5;
+    return 'High';
+  }else if(dist < 0.65){
+    this.score = 3;
+    return "Medium";
+  }else if(dist < 0.9){
+    this.score = 1;
+    return "Low";
+  }else{
+    this.score = -1;
+    return 'Too Similar';
+  }
+}
 
+}
+
+WrongAns.prototype.isValidAns = function(){
+  if(this.ans.length >= 1 && this.score !== -1){
+    return true;
+  }else{
+    return false;
+  }
 }
 
 WrongAns.prototype.commitToDb = function(){
