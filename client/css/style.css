@@ -2,6 +2,8 @@
 
 body {
     background-color: #A7A7A7;
+    font-family:"HelveticaNeue-Thin", Helvetica, Arial, sans-serif;
+  font-size: 18px;
 }
 
 .flexContainer{
@@ -59,7 +61,6 @@ input[type=text] {
    background-color: #333333;
    align-items: center;
    justify-content: center;
-   font-family: 'Montserrat', sans-serif;
      color: white;
 }
 
@@ -74,7 +75,6 @@ input[type=text] {
    background-color: #333333;
    align-items: center;
    justify-content: center;
-   font-family: 'Montserrat', sans-serif;
      color: white;
 }
 .makeWrongAnsContainer:hover{
@@ -101,7 +101,6 @@ input[type=text] {
   min-width:48%;
   min-height: 50px;
   background-color: white;
-  font-family: 'Montserrat', sans-serif;
     color: black;
     font-size: 1.8em;
 }

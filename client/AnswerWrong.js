@@ -13,8 +13,16 @@ if (Meteor.isClient) {
   });
   Template.ansDeck.helpers({
     ansList: function () {
-      var ans = Qns.find({_id:{ $nin: Session.get('seenAns') }},{});
-       Session.set('noQns',ans.fetch().length);
+      var ans = Qns.find({_id:{ $nin: Session.get('seenAns') }},{}).fetch();
+      var tmp = Session.get('noQns');
+      if(tmp < ans.length){
+       Session.set('noQns',ans.length);
+     }
+     ans.map(function(e){
+       if (Math.random() >= 0.7){e.type = 'makeWrongAns';}
+       else{e.type = 'quizCard';}
+       return e;
+     });
       return ans;
     }
   });

@@ -21,7 +21,7 @@ if(wrongAns.length === 0){this.score = 'No Score';}
   var t = levDist(this.correctAns.toLowerCase(),wrongAns.toLowerCase());
   if(t !== 0){
   var dist = 1-(t/this.correctAns.length);
-  if(dist < 0.35){
+  if(dist < 0.2){
     this.score = 5;
     return 'High';
   }else if(dist < 0.65){

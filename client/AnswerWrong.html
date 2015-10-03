@@ -16,6 +16,6 @@
 
 <template name="ansDeck">
       {{#each ansList}}
-      {{> quizCard}}
+      {{> UI.dynamic template=type}}
       {{/each}}
 </template>
