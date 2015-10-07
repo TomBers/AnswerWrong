@@ -1,6 +1,9 @@
 Template.quizCard.onCreated(function(){
   Session.set(this.data.qnId+'_selected', '');
   Session.set(this.data._id+'_AisSmall', true);
+
+// Make this subscribe more efficient at some point
+  Meteor.subscribe('Ans');
 });
 
 

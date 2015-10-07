@@ -1,0 +1,13 @@
+<template name="room">
+  <ol>
+  {{#each onlineUsers}}
+  <li>{{getUsr}}</li>
+  {{/each}}
+</ol>
+  <h5>Room {{_id}},{{rnd}}</h5>
+
+  <div class="flexContainer">
+  {{> ansDeck}}
+</div>
+
+</template>

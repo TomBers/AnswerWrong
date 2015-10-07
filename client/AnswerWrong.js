@@ -5,6 +5,12 @@ if (Meteor.isClient) {
   Session.set('userScore', 0);
   Session.set('noQns',0);
 
+  Template.ansDeck.onRendered(function(){
+    // Make better at some point
+    Meteor.subscribe('Qns');
+
+  });
+
 
   Template.addWrongAnswer.helpers({
     cardList: function () {

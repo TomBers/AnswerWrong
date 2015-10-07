@@ -1,8 +1,21 @@
 <template name="AnswerWrong">
+
+<nav class="vertical">
+  <ul>
+    <li><a href="/singlePlayer">Play a Single Player Game</a></li>
+    <li><a href="/findPlayers">Find Players</a></li>
+    <li><a href="/">Instructions</a></li>
+  </ul>
+</nav>
+
+</template>
+
+<template name="singlePlayer">
   {{> userScore}}
   <div class="flexContainer">
   {{> ansDeck}}
 </div>
+
 </template>
 
 

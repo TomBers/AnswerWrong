@@ -1,0 +1,17 @@
+<template name="findPlayers">
+  <h1>Find People to Play against</h1>
+
+  {{#each invites}}
+<h4>{{you}} invited you to a game click <a href="/room/{{room}}">here</a></h4>
+{{/each}}
+
+  <h4>Select currently online users you want to play against</h4>
+
+<form id="invitePlayers">
+    {{#each onlineUsers}}
+     <input type="checkbox" value="{{getUsr.id}}">{{getUsr.name}}<br>
+    {{/each}}
+    <input type="submit" value="Invite">
+  </form>
+
+</template>
