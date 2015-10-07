@@ -28,6 +28,5 @@ Template.room.events({
     console.log(template.data);
     console.log(Session.get(template.data._id));
     // console.log(Meteor.userId());
-
   }
 });
