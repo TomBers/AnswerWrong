@@ -5,9 +5,18 @@
   {{/each}}
 </ol>
   <h5>Room {{_id}},{{rnd}}</h5>
+  <h2>{{activeUser}}</h2>
+<br>
+  <button id="makeActive">Make Active</button>
+  <button id="cycle">Cycle</button>
+  <br>
 
-  <div class="flexContainer">
+  {{#each ansList}}
+  {{> UI.dynamic template=type}}
+  {{/each}}
+
+  <!-- <div class="flexContainer">
   {{> ansDeck}}
-</div>
+</div> -->
 
 </template>

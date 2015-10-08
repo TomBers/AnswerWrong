@@ -27,15 +27,11 @@ Template.findPlayers.events({
    });
 
    if(invitedUsers.length >= 0){
-   Meteor.call('createRoom', function(e,d){
+   Meteor.call('createRoom',Meteor.userId(), function(e,d){
         // console.log(d);
         Meteor.call('inviteUsers',invitedUsers,Meteor.userId(),d);
         Router.go('/room/'+d);
       });
     }
-
-
-   console.log(array);
-
   }
 });
