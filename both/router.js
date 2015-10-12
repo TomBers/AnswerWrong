@@ -18,6 +18,11 @@ Router.map(function() {
     template: 'findPlayers'
   });
 
+  this.route('/about', {
+    path: '/about',
+    template: 'about'
+  });
+
   this.route('room', {
   path: '/room/:_id',
   template: 'room',

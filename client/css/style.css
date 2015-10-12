@@ -7,7 +7,17 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-
+.aboutBox{
+	width:50%;
+}
+h2{
+	margin-top: 20px;
+	margin-bottom:20px;
+}
+ol{
+	margin:20px;
+	padding:20px;
+}
 body {
     background: #eee;
     color: #444;
@@ -164,4 +174,10 @@ input[type=text] {
   .makeWrongAnsAns {
     margin-top: 10px;
   font-size: 1.4em;
+}
+
+@media only screen and (max-width: 980px) {
+	.aboutBox{
+		width:100%;
+	}
 }
