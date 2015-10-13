@@ -10,7 +10,7 @@ Template.makeWrongAns.helpers({
 Template.makeWrongAns.onRendered(function () {
   // console.log(this);
   Session.set(this.data._id+'_QisSmall', true);
-  this.data.wa = new WrongAns(this.data._id,this.data.ans);
+  this.data.wa = new WrongAns(this.data._id,this.data.ans,Session.get('room'));
   // console.log(this.data);
 })
 
@@ -25,7 +25,7 @@ Template.makeWrongAns.events({
     var tmp = this;
     var isSmall = Session.get(this._id+'_QisSmall');
     if(isSmall){
-    Velocity(e.currentTarget,{ minHeight:'500px',height: ['500px','50px'],width:["500px","50px"], backgroundColor:'#'+Math.floor(Math.random()*16777215).toString(16)},{duration:2000})
+    Velocity(e.currentTarget,{ minHeight:'500px',height: ['500px','50px'],width:["500px","50px"], backgroundColor:new RandomCol().getCol()},{duration:1000})
     .then(function(ele) {
       Session.set(tmp._id+'_QisSmall', false); });
   }

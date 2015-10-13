@@ -1,6 +1,7 @@
 Template.room.onRendered(function(){
   var room = this.data._id;
   Session.set(room,[]);
+  Session.set('room',this.data._id);
   Meteor.call('updateUserRoom',Meteor.userId(),room, function(e,d){
     Meteor.subscribe('RoomUserStatus',room);
   });

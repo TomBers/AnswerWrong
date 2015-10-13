@@ -52,7 +52,7 @@ Meteor.startup(function() {
 
 Meteor.methods({
   addWrongAns: function(wa){
-    WrongAnswers.insert({qnId:wa.qnId,ownerId:wa.ownerId,ans:wa.ans,views:0,choosen:0,score:wa.score,rnd:Math.random()});
+    WrongAnswers.insert({qnId:wa.qnId,ownerId:wa.ownerId,ans:wa.ans,views:0,choosen:0,score:wa.score,rnd:Math.random(),room:wa.room});
   },
   addQn: function(a){
     return Qns.upsert({qn:a.qn,ans:a.ans},{ownerId:a.ownerId,qn:a.qn,ans:a.ans,rnd:Math.random()});

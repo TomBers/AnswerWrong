@@ -1,15 +1,24 @@
-Template.quizCard.onCreated(function(){
-  Session.set(this.data.qnId+'_selected', '');
+// Template.quizCard.onCreated(function(){
+//
+// });
+
+Template.quizCard.onRendered(function(){
+
+  Session.set(this.data._id+'_selected', '');
   Session.set(this.data._id+'_AisSmall', true);
 
 // Make this subscribe more efficient at some point
   Meteor.subscribe('Ans');
+
+  var tmp = this.data;
+  Velocity(this.firstNode,{ minHeight:'500px',height: ['500px','50px'],width:["500px","50px"],backgroundColor:new RandomCol().getCol()},{duration:1000})
+  .then(function(ele) {Session.set(tmp._id+'_AisSmall', false);});
 });
 
 
 Template.quizCard.helpers({
   getAns: function(){
-    rand = Math.random();
+    // rand = Math.random();
     var wa = WrongAnswers.find({qnId:this._id},{limit:5,sort: {choosen:1}}).fetch();
     this.waID = wa.map(function(obj){return obj._id});
     var tra = new WrongAns(this._id,this.ans);
@@ -22,19 +31,20 @@ Template.quizCard.helpers({
   }
 });
 
-Template.quizCard.events({
-  "click .makeWrongAnsContainer":function(e,t){
-    var tmp = this;
-    var isSmall = Session.get(this._id+'_AisSmall');
-    if(isSmall){
-    Velocity(e.currentTarget,{ minHeight:'500px',height: ['500px','50px'],width:["500px","50px"],backgroundColor:'#'+Math.floor(Math.random()*16777215).toString(16)},{duration:2000})
-    .then(function(ele) {Session.set(tmp._id+'_AisSmall', false);});
-  }else{
-    // Velocity(e.currentTarget,{ height: "50px",width:"50px"},
-    // {duration:2000,begin: function(elements) { Session.set(tmp._id+'_AisSmall', true); }});
-  }
-}
-});
+// Template.quizCard.events({
+  // "click .makeWrongAnsContainer":function(e,t){
+
+//     var tmp = this;
+//     var isSmall = Session.get(this._id+'_AisSmall');
+//     if(isSmall){
+//     Velocity(e.currentTarget,{ minHeight:'500px',height: ['500px','50px'],width:["500px","50px"],backgroundColor:new RandomCol().getCol()},{duration:2000})
+//     .then(function(ele) {Session.set(tmp._id+'_AisSmall', false);});
+//   }else{
+//     // Velocity(e.currentTarget,{ height: "50px",width:"50px"},
+//     // {duration:2000,begin: function(elements) { Session.set(tmp._id+'_AisSmall', true); }});
+//   }
+// }
+// });
 
 Template.ansItem.helpers({
   checked: function(){
@@ -59,11 +69,12 @@ Template.ansItem.events({
       }
       });
 
-
+      var i = Session.get('noQns');
+      Session.set('noQns',++i);
       var pid = Template.parentData()._id;
 
       if (typeof this.correctAns !== "undefined" && this.correctAns === this.ans){
-        alert('Correct');
+        // alert('Correct');
         var c = Session.get('userScore') + 1;
         Session.set('userScore', c);
         removeQn(pid);
@@ -75,7 +86,7 @@ Template.ansItem.events({
           }
           if(result){
             // console.log(result);
-            alert('Good Try - But Wrong');
+            // alert('Good Try - But Wrong');
             removeQn(pid);
           }
         });

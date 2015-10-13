@@ -1,4 +1,4 @@
-WrongAns = function (qnId,correctAns){
+WrongAns = function (qnId,correctAns,room){
   this._id = Math.random();
   this.qnId = qnId;
   this.ownerId = Meteor.userId();
@@ -7,6 +7,7 @@ WrongAns = function (qnId,correctAns){
   this.views = 0;
   this.choosen = 0;
   this.score = '';
+  this.room = room;
 }
 
 WrongAns.prototype.setAns = function(wrongAns){
