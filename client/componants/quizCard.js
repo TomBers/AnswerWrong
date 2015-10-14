@@ -19,7 +19,16 @@ Template.quizCard.onRendered(function(){
 Template.quizCard.helpers({
   getAns: function(){
     // rand = Math.random();
-    var wa = WrongAnswers.find({qnId:this._id},{limit:5,sort: {choosen:1}}).fetch();
+    // var wa = WrongAnswers.find({qnId:this._id},{limit:3,sort: {choosen:1}}).fetch();
+    var r = Session.get('room');
+    var n = 5;//Session.get('noOfAns');
+      var wa = WrongAnswers.find({qnId:this._id,room:r},{limit:n,sort: {choosen:1}}).fetch();
+      if(wa.length < n){
+        var l = n - wa.length;
+        var tmp =  WrongAnswers.find({qnId:this._id},{limit:l,sort: {choosen:1}}).fetch();
+        wa.push.apply(wa,tmp);
+      }
+
     this.waID = wa.map(function(obj){return obj._id});
     var tra = new WrongAns(this._id,this.ans);
     tra.setAns(this.ans);
