@@ -22,12 +22,17 @@ Template.quizCard.helpers({
     // var wa = WrongAnswers.find({qnId:this._id},{limit:3,sort: {choosen:1}}).fetch();
     var r = Session.get('room');
     var n = 5;//Session.get('noOfAns');
+    if(r !== ''){
       var wa = WrongAnswers.find({qnId:this._id,room:r},{limit:n,sort: {choosen:1}}).fetch();
       if(wa.length < n){
         var l = n - wa.length;
         var tmp =  WrongAnswers.find({qnId:this._id},{limit:l,sort: {choosen:1}}).fetch();
         wa.push.apply(wa,tmp);
       }
+    }else{
+      var wa = WrongAnswers.find({qnId:this._id},{limit:n,sort: {choosen:1}}).fetch();
+    }
+
 
     this.waID = wa.map(function(obj){return obj._id});
     var tra = new WrongAns(this._id,this.ans);
