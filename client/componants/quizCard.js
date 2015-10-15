@@ -24,11 +24,12 @@ Template.quizCard.helpers({
     var n = 5;//Session.get('noOfAns');
     if(r !== ''){
       var wa = WrongAnswers.find({qnId:this._id,room:r},{limit:n,sort: {choosen:1}}).fetch();
-      if(wa.length < n){
-        var l = n - wa.length;
-        var tmp =  WrongAnswers.find({qnId:this._id},{limit:l,sort: {choosen:1}}).fetch();
-        wa.push.apply(wa,tmp);
-      }
+      // if(wa.length < n){
+      //   var l = n - wa.length;
+      //   var tmp =  WrongAnswers.find({qnId:this._id},{limit:l,sort: {choosen:1}}).fetch();
+      //   // Need to add a NIN function for id's so no duplicates
+      //   wa.push.apply(wa,tmp);
+      // }
     }else{
       var wa = WrongAnswers.find({qnId:this._id},{limit:n,sort: {choosen:1}}).fetch();
     }
@@ -45,20 +46,6 @@ Template.quizCard.helpers({
   }
 });
 
-// Template.quizCard.events({
-  // "click .makeWrongAnsContainer":function(e,t){
-
-//     var tmp = this;
-//     var isSmall = Session.get(this._id+'_AisSmall');
-//     if(isSmall){
-//     Velocity(e.currentTarget,{ minHeight:'500px',height: ['500px','50px'],width:["500px","50px"],backgroundColor:new RandomCol().getCol()},{duration:2000})
-//     .then(function(ele) {Session.set(tmp._id+'_AisSmall', false);});
-//   }else{
-//     // Velocity(e.currentTarget,{ height: "50px",width:"50px"},
-//     // {duration:2000,begin: function(elements) { Session.set(tmp._id+'_AisSmall', true); }});
-//   }
-// }
-// });
 
 Template.ansItem.helpers({
   checked: function(){
@@ -77,7 +64,7 @@ Template.ansItem.events({
     // update Viewed Qns
 
     // console.log(Template.parentData().waID);
-    Meteor.call("updateViews", Template.parentData().waID, function(error, result){
+    Meteor.call("updateNoViewsAndCompleteTurn", Template.parentData().waID,Meteor.userId(),Session.get('room'), function(error, result){
       if(error){
         console.log("error", error);
       }

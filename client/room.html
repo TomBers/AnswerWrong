@@ -4,15 +4,17 @@
   <li>{{getUsr}}</li>
   {{/each}}
 </ol>
-  <h5>Room {{_id}},{{rnd}}</h5>
-  <h2>{{activeUser}}</h2>
+  <!-- <h5>Room {{_id}},{{rnd}}</h5> -->
 <br>
   <button id="makeActive">Make Active</button>
-  <button id="cycle">Cycle</button>
   <br>
 
   {{#each ansList}}
+  {{#if drawTemplate}}
   {{> UI.dynamic template=type}}
+  {{else}}
+  <h1>{{msg}}</h1>
+  {{/if}}
   {{/each}}
 
   <!-- <div class="flexContainer">

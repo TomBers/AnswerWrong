@@ -19,6 +19,13 @@ Template.findPlayers.helpers({
 
 
 Template.findPlayers.events({
+  "click .inviteLink": function(event, template){
+    event.preventDefault();
+    var trm = this.room;
+    Meteor.call('acceptInvite',this._id, function(e,d){
+      Router.go('/room/'+trm);
+    })
+  },
   "submit #invitePlayers": function(event, template){
     event.preventDefault();
     var selected = template.findAll( "input[type=checkbox]:checked");

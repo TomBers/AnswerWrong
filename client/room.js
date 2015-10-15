@@ -19,33 +19,35 @@ Template.room.helpers({
     });
   },
   getUsr: function(){
-    return this.emails[0].address;
-  },
-  activeUser: function(){
-    if(this.activeUser === Meteor.userId()){
-      return 'Active User';
-    }else{
-      return 'WAITING';
-    }
+    // console.log(this);
+    return this.emails[0].address + ' ' + this.gameState;
   },
   ansList: function () {
     var ans = Qns.find({},{limit : 1}).fetch();
-    var au = this.activeUser;
-    ans.map(function(e){
-      if (au !== Meteor.userId()){e.type = 'makeWrongAns';}
-      else{e.type = 'quizCard';}
-      return e;
-    });
-    return ans;
+    var gs = Meteor.users.findOne({_id:Meteor.userId()}).gameState;
+
+    switch (gs) {
+      case 'CA': {
+        ans.map(function(e){ e.type = 'makeWrongAns'; e.drawTemplate = true; return e;});
+        return ans;
+      }
+        break;
+        case 'AQ':  {
+          ans.map(function(e){ e.type = 'quizCard'; e.drawTemplate = true; return e;});
+          return ans;
+        }
+          break;
+      default: {
+        ans.map(function(e){ e.msg = 'Waiting for other players'; e.drawTemplate = false; return e;});
+      return ans;
+    }
   }
+}
 });
 
 
 Template.room.events({
   "click button#makeActive": function(event, template){
     Meteor.call('updateRoomActiveUser',template.data._id,Meteor.userId());
-  },
-  "click button#cycle": function(event, template){
-    Meteor.call('cycleActiveUser',template.data._id);
   }
 });
