@@ -1,3 +1,8 @@
+Template.myWrongAnswers.onCreated(function(){
+  Meteor.subscribe("myWrongAnswers", Meteor.userId());
+});
+
+
 Template.myWrongAnswers.helpers({
   WrongAnswer: function(){
      return WrongAnswers.find({ownerId: Meteor.userId()},{sort:{choosen:-1}});

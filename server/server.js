@@ -21,6 +21,10 @@ Meteor.publish("Rooms", function (nme) {
   return Rooms.find({_id:nme});
 });
 
+Meteor.publish("myWrongAnswers", function(me){
+  return WrongAnswers.find({ownerId: me});
+})
+
 Meteor.publish("RoomUserStatus", function(room) {
   return Meteor.users.find({ "status.online": true, room:room }, {});
 });
@@ -68,10 +72,14 @@ Meteor.methods({
   addQn: function(a){
     return Qns.upsert({qn:a.qn,ans:a.ans},{ownerId:a.ownerId,qn:a.qn,ans:a.ans,rnd:Math.random()});
   },
-  updateNoViewsAndCompleteTurn:function(WrongAnswersShown,usr,room){
+  updateNoViewsAndCompleteTurn:function(WrongAnswersShown,usr,room,qnid){
     // console.log(WrongAnswersShown);
     Meteor.users.update({room:room},{$set:{gameState:'CA'}},{multi: true});
     Meteor.users.update({_id:usr}, {$set:{gameState:"WT"}} );
+
+    var sq = Rooms.findOne({_id:room}).seenQns;
+    sq.push(qnid);
+    Rooms.update({_id:room}, {$set:{ seenQns:sq}});
 
 
     if(WrongAnswersShown && WrongAnswersShown.length > 0){
@@ -84,7 +92,7 @@ Meteor.methods({
       return WrongAnswers.update( {_id: selAns},{$inc: {choosen:1}});
     },
     createRoom:function(au){
-      return Rooms.insert({activeUser:au,rnd:Math.random()});
+      return Rooms.insert({activeUser:au,rnd:Math.random(),seenQns:[]});
     },
     updateRoomActiveUser: function(room,au){
       Rooms.update({_id:room}, {$set:{activeUser:au}});
@@ -123,9 +131,9 @@ Meteor.methods({
     },
     // Simple State system 4 states, ActiveUser(waiting for answers), Creating Answer, Finished Answer, AnswerQn
     updateUserRoom:function(me,room){
-      var au = Meteor.users.find( {"status.online": true, room:room, gameState:"WT"} ).fetch();
-      // If I am first in the room, let me be the Active user
-      if(au.length === 0){
+      var au = Rooms.findOne( {_id:room } ).activeUser;
+      // Active user is the person who created the room and invited others
+      if(au === me){
       return Meteor.users.update({_id:me}, {$set:{room:room,gameState:"WT",time:new Date()}} );
     }else{
       return Meteor.users.update({_id:me}, {$set:{room:room,gameState:"CA",time:new Date()}} );

@@ -23,7 +23,7 @@ Template.room.helpers({
     return this.emails[0].address + ' ' + this.gameState;
   },
   ansList: function () {
-    var ans = Qns.find({},{limit : 1}).fetch();
+    var ans = Qns.find({_id:{ $nin: Rooms.findOne({_id:this._id}).seenQns} },{limit : 1}).fetch();
     var gs = Meteor.users.findOne({_id:Meteor.userId()}).gameState;
 
     switch (gs) {

@@ -11,6 +11,11 @@ Template.makeWrongAns.onRendered(function () {
   // console.log(this);
   Session.set(this.data._id+'_QisSmall', true);
   this.data.wa = new WrongAns(this.data._id,this.data.ans,Session.get('room'));
+
+  var tmp = this.data;
+  Velocity(this.firstNode,{ minHeight:'500px',height: ['500px','50px'],width:["500px","50px"], backgroundColor:new RandomCol().getCol()},{duration:1000})
+  .then(function(ele) { Session.set(tmp._id+'_QisSmall', false); });
+
   // console.log(this.data);
 })
 
@@ -22,13 +27,13 @@ Template.makeWrongAns.onRendered(function () {
 
 Template.makeWrongAns.events({
   "click .makeWrongAnsContainer":function(e,t){
-    var tmp = this;
-    var isSmall = Session.get(this._id+'_QisSmall');
-    if(isSmall){
-    Velocity(e.currentTarget,{ minHeight:'500px',height: ['500px','50px'],width:["500px","50px"], backgroundColor:new RandomCol().getCol()},{duration:1000})
-    .then(function(ele) {
-      Session.set(tmp._id+'_QisSmall', false); });
-  }
+    // var tmp = this;
+    // var isSmall = Session.get(this._id+'_QisSmall');
+    // if(isSmall){
+  //   Velocity(e.currentTarget,{ minHeight:'500px',height: ['500px','50px'],width:["500px","50px"], backgroundColor:new RandomCol().getCol()},{duration:1000})
+  //   .then(function(ele) {
+  //     Session.set(tmp._id+'_QisSmall', false); });
+  // }
   // else{
     // Velocity(e.currentTarget,{ height: "50px",width:"50px"},
     // {duration:2000,begin: function(elements) { Session.set(tmp._id+'_QisSmall', true); }});

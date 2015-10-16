@@ -24,12 +24,15 @@ Template.quizCard.helpers({
     var n = 5;//Session.get('noOfAns');
     if(r !== ''){
       var wa = WrongAnswers.find({qnId:this._id,room:r},{limit:n,sort: {choosen:1}}).fetch();
-      // if(wa.length < n){
-      //   var l = n - wa.length;
-      //   var tmp =  WrongAnswers.find({qnId:this._id},{limit:l,sort: {choosen:1}}).fetch();
-      //   // Need to add a NIN function for id's so no duplicates
-      //   wa.push.apply(wa,tmp);
-      // }
+      var tids = wa.map(function(e){
+        return e._id;
+      })
+      if(wa.length < n){
+        var l = n - wa.length;
+        var tmp =  WrongAnswers.find({qnId:this._id, _id:{$nin:tids} },{limit:l,sort: {choosen:1}}).fetch();
+        // Need to add a NIN function for id's so no duplicates
+        wa.push.apply(wa,tmp);
+      }
     }else{
       var wa = WrongAnswers.find({qnId:this._id},{limit:n,sort: {choosen:1}}).fetch();
     }
@@ -64,7 +67,7 @@ Template.ansItem.events({
     // update Viewed Qns
 
     // console.log(Template.parentData().waID);
-    Meteor.call("updateNoViewsAndCompleteTurn", Template.parentData().waID,Meteor.userId(),Session.get('room'), function(error, result){
+    Meteor.call("updateNoViewsAndCompleteTurn", Template.parentData().waID,Meteor.userId(),Session.get('room'),Template.parentData()._id, function(error, result){
       if(error){
         console.log("error", error);
       }
